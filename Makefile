@@ -14,6 +14,9 @@ CLSS		= $(patsubst ${SRCS_DIR}%.java,${CLSS_DIR}%.class,${SRCS})
 JC			= javac
 JFLAGS		= -g
 
+JAVA		= java
+CLPTH		= -classpath
+
 NAME		= best_java
 
 MKDIR		= mkdir -p
@@ -23,11 +26,14 @@ RM			= rm -rf
 
 ${CLSS_DIR}%.class:		${SRCS_DIR}%.java
 	@${MKDIR} ${CLSS_DIR}
-	${JC} ${JFLAGS} -d ${CLSS_DIR} $<
+	@${JC} ${JFLAGS} -d ${CLSS_DIR} $<
 
 ${NAME}:	${CLSS}
 
 all: ${NAME}
+
+run: all
+	@${JAVA} ${CLPTH} ${CLSS_DIR} Main
 
 clean:
 	${RM} ${CLSS_DIR}
