@@ -1,26 +1,38 @@
 #============================================ Makefile ============================================#
-default:	classes
+default:	all
 
 SHELL		:= /bin/sh
 
-SRCS_DIR	=
+CLSS_DIR	= class/
+SRCS_DIR	= src/
 INCS_DIR	=
 
 INCS		=
-SRCS		= Main.java
+SRCS		= ${SRCS_DIR}Main.java
+CLSS		= $(patsubst ${SRCS_DIR}%.java,${CLSS_DIR}%.class,${SRCS})
 
 JC			= javac
 JFLAGS		= -g
 
+NAME		= best_java
+
+MKDIR		= mkdir -p
 RM			= rm -rf
 
 .SUFFIXES: .java .class
 
-.java.class:
-	${JC} ${JFLAGS} ${SRCS_DIR}${SRCS}
+${CLSS_DIR}%.class:		${SRCS_DIR}%.java
+	@${MKDIR} ${CLSS_DIR}
+	${JC} ${JFLAGS} -d ${CLSS_DIR} $<
 
-classes: $(SRCS:.java=.class)
+${NAME}:	${CLSS}
+
+all: ${NAME}
 
 clean:
-	${RM} *.class
+	${RM} ${CLSS_DIR}
+
+fclean: clean
+
+re: fclean all
 #================================================ EOF =============================================#
