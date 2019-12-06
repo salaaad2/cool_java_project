@@ -33,7 +33,7 @@ ${NAME}:	${CLSS}
 all: ${NAME}
 
 run: all
-	${JAVA} ${CLPTH} ${CLSS_DIR} Main
+	@${JAVA} ${CLPTH} ${CLSS_DIR} Main
 
 clean:
 	${RM} ${CLSS_DIR}
