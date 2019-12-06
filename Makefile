@@ -26,14 +26,14 @@ RM			= rm -rf
 
 ${CLSS_DIR}%.class:		${SRCS_DIR}%.java
 	@${MKDIR} ${CLSS_DIR}
-	@${JC} ${JFLAGS} -d ${CLSS_DIR} $<
+	${JC} ${JFLAGS} -d ${CLSS_DIR} $<
 
 ${NAME}:	${CLSS}
 
 all: ${NAME}
 
 run: all
-	@${JAVA} ${CLPTH} ${CLSS_DIR} Main
+	${JAVA} ${CLPTH} ${CLSS_DIR} Main
 
 clean:
 	${RM} ${CLSS_DIR}
