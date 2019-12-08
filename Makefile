@@ -17,6 +17,9 @@ JFLAGS		= -g
 JAVA		= java
 CLPTH		= -classpath
 
+JAR			= jar
+JARFLAGS	= -c
+
 NAME		= best_java
 
 MKDIR		= mkdir -p
@@ -35,6 +38,8 @@ all: ${NAME}
 run: all
 	@${JAVA} ${CLPTH} ${CLSS_DIR} Main
 
+release: all
+	${JAR} ${JARFLAGS} bin
 clean:
 	${RM} ${CLSS_DIR}
 
