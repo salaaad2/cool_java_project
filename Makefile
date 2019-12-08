@@ -5,6 +5,7 @@ SHELL		:= /bin/sh
 
 CLSS_DIR	= class/
 SRCS_DIR	= src/
+TRGT_DIR	= bin/
 INCS_DIR	=
 
 INCS		=
@@ -20,7 +21,7 @@ CLPTH		= -classpath
 JAR			= jar
 JARFLAGS	= -c
 
-NAME		= best_java
+NAME		= best_java.jar
 
 MKDIR		= mkdir -p
 RM			= rm -rf
@@ -31,19 +32,24 @@ ${CLSS_DIR}%.class:		${SRCS_DIR}%.java
 	@${MKDIR} ${CLSS_DIR}
 	${JC} ${JFLAGS} -d ${CLSS_DIR} $<
 
-${NAME}:	${CLSS}
+${NAME}:	release
 
-all: ${NAME}
+all: ${CLSS}
+
+clean:
+	${RM} ${CLSS_DIR}
+
+fclean: clean
+	${RM} ${TRGT_DIR}
+
+re: fclean all
 
 run: all
 	@${JAVA} ${CLPTH} ${CLSS_DIR} Main
 
 release: all
-	${JAR} ${JARFLAGS} bin
-clean:
-	${RM} ${CLSS_DIR}
+	@${MKDIR} ${TRGT_DIR}
+	${JAR} ${JARFLAGS} ${TRGT_DIR}${NAME} ${CLSS_DIR}
 
-fclean: clean
-
-re: fclean all
+.PHONY: all clean fclean re run release
 #================================================ EOF =============================================#
